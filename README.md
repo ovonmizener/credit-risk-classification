@@ -5,9 +5,12 @@ File Structure
 --------------
 The repository is organized as follows:
 
-credit-risk-classification/Resources/lending_data.csv # Historical lending data file 
-credit-risk-classification/Credit_Risk/credit_risk_classification.ipynb # Jupyter Notebook containing data analysis and model code 
+credit-risk-classification/Resources/lending_data.csv 
+
+credit-risk-classification/Credit_Risk/credit_risk_classification.ipynb 
+
 credit-risk-classification/README.txt 
+
 credit-risk-classification/report-template.md
 
 Project Workflow
