@@ -1,27 +1,52 @@
-# Module 12 Report Template
+Analysis/Report
 
-## Overview of the Analysis
+For this project, I worked with a dataset that includes several key financial variables:
 
-In this section, describe the analysis you completed for the machine learning models used in this Challenge. This might include:
+  - loan_size
+  - interest_rate
+  - derogatory_marks
+  - total_debt
+  - borrower_income
+  - debt_to_income
+  - num_of_accounts
 
-* Explain the purpose of the analysis.
-* Explain what financial information the data was on, and what you needed to predict.
-* Provide basic information about the variables you were trying to predict (e.g., `value_counts`).
-* Describe the stages of the machine learning process you went through as part of this analysis.
-* Briefly touch on any methods you used (e.g., `LogisticRegression`, or any other algorithms).
+The target variable, loan_status, tells us if a loan is healthy (0) or high-risk (1). I did a quick dive into the data using commands like .head() and .value_counts() to make sure everything was in order and to see how the labels were distributed.
 
-## Results
+Here’s how I tackled the problem step by step:
 
-Using bulleted lists, describe the accuracy scores and the precision and recall scores of all machine learning models.
+1. **Data Collection & Exploration:**  
+   I imported the CSV file from the Resources folder and took a good look at the structure and contents to make sure everything was as expected.
 
-* Machine Learning Model 1:
-    * Description of Model 1 Accuracy, Precision, and Recall scores.
+2. **Data Preparation:**  
+   I split up the data by separating out the target variable (loan_status) from the rest of the features. This way, `y` represents what I want to predict, and `X` holds all the features.
 
-## Summary
+3. **Data Splitting:**  
+   I used train_test_split to break the dataset into training and testing sets with roughly an 80/20 split, using a fixed random state to keep the results reproducible.
 
-Summarize the results of the machine learning models, and include a recommendation on the model to use, if any. For example:
+4. **Model Building:**  
+   I set up a Logistic Regression model. With a specified random_state and a bit of an increase in max_iter to ensure convergence, I trained the model on the training data.
 
-* Which one seems to perform best? How do you know it performs best?
-* Does performance depend on the problem we are trying to solve? (For example, is it more important to predict the `1`'s, or predict the `0`'s? )
+5. **Model Evaluation:**  
+   After training, I made predictions with the test set. I then evaluated the model using a confusion matrix and a classification report, which gave me insights into the accuracy, precision, and recall.
 
-If you do not recommend any of the models, please justify your reasoning.
+I chose Logistic Regression for this task because it’s simple, interpretable, and well-suited for the binary classification of loan statuses.
+
+Results
+
+* **Machine Learning Model 1 (Logistic Regression):**
+    * **Accuracy:** I found a 99% accuracy
+    * **Precision:** For healthy loans we found 1.0 (100%), for high-risk loans we found 0.86 (86%)
+    * **Recall:** For healthy loans we found 1.0 (100%), for high-risk loans we found 0.91 (91%).
+
+The classification report indicated that overall accuracy is near perfect. The model does a great job at predicting healthy loans with precision, but the recall for high-risk loans isn’t as strong, meaning it may be missing some of those high-risk cases.
+
+Summary
+
+**Recommendation:**
+
+- Given its simplicity and transparency, I’d use the logistic regression model as a strong baseline for credit risk assessment.  
+- That said, its lower recall on high-risk loans suggests it needs a bit more tuning before you could confidently deploy it in a production setting.  
+- To improve, future work could focus on additional feature engineering, tweaking the model (like adjusting class weights), or even trying out other models such as decision trees or ensemble methods to better catch high-risk cases.  
+- Remember, the importance of accuracy versus recall depends on the business goal—if flagging high-risk loans is critical, boosting recall might trump overall accuracy.
+
+While logistic regression lays down a good starting point, its current limitations around high-risk prediction mean further refinement would be needed before using it as the sole credit risk assessment tool.
